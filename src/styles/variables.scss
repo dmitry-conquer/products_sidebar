@@ -1,0 +1,13 @@
+@use "helpers" as *;
+
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-accent: #d35b5b;
+
+  --font-family-base: "Roboto", sans-serif;
+  --font-family-accent: "Roboto", sans-serif;
+
+  --container-width: #{rem(1440)};
+  --container-padding-x: #{rem(20)};
+}

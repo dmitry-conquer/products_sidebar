@@ -1,0 +1,10 @@
+// @use "reset";
+@use "fonts";
+@use "variables";
+@use "utils";
+@use "globals";
+@use "helpers" as *;
+
+// Importing components
+@use './components/footer';
+@use './components/header';
