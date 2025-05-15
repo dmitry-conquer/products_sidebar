@@ -7,8 +7,129 @@
   </head>
   <body>
     <div class="wrapper">
-      <main>
-        <div></div>
+      <main data-filter-container>
+        <div>
+          <h2>Area</h2>
+          <input type="text" value="60" name="area" />
+        </div>
+        <div>
+          <h2>Kitchens</h2>
+          <div>
+            <label>
+              1
+              <input type="radio" name="kitchens" value="1" checked />
+            </label>
+            <label>
+              2
+              <input type="radio" name="kitchens" value="2" />
+            </label>
+            <label>
+              3
+              <input type="radio" name="kitchens" value="3" />
+            </label>
+            <label>
+              4
+              <input type="radio" name="kitchens" value="4" />
+            </label>
+          </div>
+        </div>
+        <div>
+          <h2>Bathrooms</h2>
+          <div>
+            <label>
+              1
+              <input type="radio" name="bathrooms" value="1" />
+            </label>
+            <label>
+              2
+              <input type="radio" name="bathrooms" value="2" />
+            </label>
+            <label>
+              3
+              <input type="radio" name="bathrooms" value="3" checked />
+            </label>
+            <label>
+              4
+              <input type="radio" name="bathrooms" value="4" />
+            </label>
+          </div>
+        </div>
+        <div>
+          <div>Fetures</div>
+          <div>
+            <label>
+              <input type="checkbox" name="features" value="Garden" />
+              Garden
+            </label>
+            <label>
+              <input type="checkbox" name="features" value="Balcony" />
+              Balcony
+            </label>
+            <label>
+              <input type="checkbox" name="features" value="Parking" />
+              Parking
+            </label>
+            <label>
+              <input type="checkbox" name="features" value="Terrace" />
+              Terrace
+            </label>
+            <label>
+              <input type="checkbox" name="features" value="Pool" />
+              Pool
+            </label>
+            <label>
+              <input type="checkbox" name="features" value="Gym" />
+              Gym
+            </label>
+          </div>
+        </div>
+        <div>
+          <div>features 2</div>
+          <div>
+            <label>
+              <input type="checkbox" name="features-2" value="Garden" />
+              Garden
+            </label>
+            <label>
+              <input type="checkbox" name="features-2" value="Balcony" />
+              Balcony
+            </label>
+            <label>
+              <input type="checkbox" name="features-2" value="Parking" />
+              Parking
+            </label>
+            <label>
+              <input type="checkbox" name="features-2" value="Terrace" />
+              Terrace
+            </label>
+            <label>
+              <input type="checkbox" name="features-2" value="Pool" />
+              Pool
+            </label>
+            <label>
+              <input type="checkbox" name="features-2" value="Gym" />
+              Gym
+            </label>
+          </div>
+        </div>
+        <div>
+          <h2>Type</h2>
+          <div>
+            <label>
+              <input type="radio" name="type" value="House" />
+              House
+            </label>
+            <label>
+              <input type="radio" name="type" value="Apartment" />
+              Apartment
+            </label>
+            <label>
+              <input type="radio" name="type" value="Studio" checked />
+              Studio
+            </label>
+          </div>
+        </div>
+
         <button id="filter">FIND</button>
       </main>
     </div>

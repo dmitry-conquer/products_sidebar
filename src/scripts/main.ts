@@ -1,5 +1,6 @@
 import "../styles/main.scss";
 import ApartmentFilter from "./apartment-filter";
+import Criteria from "./filter-criteria";
 
 document.addEventListener("DOMContentLoaded", () => {
   const apartments = [
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 250000,
       kitchens: 1,
       bathrooms: 2,
-      type: "Two-bedroom",
+      type: "Apartment",
       area: 75,
       features: ["Garden", "Garage"],
     },
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 180000,
       kitchens: 1,
       bathrooms: 1,
-      type: "One-bedroom",
+      type: "House",
       area: 50,
       features: ["Balcony"],
     },
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 220000,
       kitchens: 1,
       bathrooms: 2,
-      type: "Two-bedroom",
+      type: "Apartment",
       area: 70,
       features: ["Garden"],
     },
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 150000,
       kitchens: 1,
       bathrooms: 1,
-      type: "One-bedroom",
+      type: "House",
       area: 45,
       features: ["Balcony"],
     },
@@ -99,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 260000,
       kitchens: 1,
       bathrooms: 2,
-      type: "Two-bedroom",
+      type: "Apartment",
       area: 80,
       features: ["Garage"],
     },
@@ -109,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 170000,
       kitchens: 1,
       bathrooms: 1,
-      type: "One-bedroom",
+      type: "House",
       area: 55,
       features: ["Balcony", "Parking"],
     },
@@ -139,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 240000,
       kitchens: 1,
       bathrooms: 2,
-      type: "Two-bedroom",
+      type: "Apartment",
       area: 72,
       features: ["Garage"],
     },
@@ -149,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 160000,
       kitchens: 1,
       bathrooms: 1,
-      type: "One-bedroom",
+      type: "House",
       area: 48,
       features: ["Balcony"],
     },
@@ -179,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 270000,
       kitchens: 1,
       bathrooms: 2,
-      type: "Two-bedroom",
+      type: "Apartment",
       area: 78,
       features: ["Garden"],
     },
@@ -189,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: 190000,
       kitchens: 1,
       bathrooms: 1,
-      type: "One-bedroom",
+      type: "House",
       area: 52,
       features: ["Balcony", "Parking"],
     },
@@ -205,13 +206,12 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
-  const filterCriteria = {
-    equals_kitchens: 1,
-    equals_bathrooms: 2,
-    contains_features: ["Garden", "Garage"],
-    aaaa: "aaaa",
-  };
+  const criteria = new Criteria();
 
-  const apartmentFilter = new ApartmentFilter(apartments, filterCriteria);
-  apartmentFilter.applyFilters();
+  const apartmentFilter = new ApartmentFilter(apartments);
+
+  const filterButton = document.getElementById("filter") as HTMLButtonElement;
+  filterButton?.addEventListener("click", () => {
+    apartmentFilter.applyFilters(criteria.get());
+  });
 });

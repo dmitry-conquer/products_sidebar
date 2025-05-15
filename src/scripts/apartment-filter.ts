@@ -1,35 +1,46 @@
+import { isPrimitive, isArrayOfStringOrNumber } from "./type-guards";
+
 export default class ApartmentFilter {
   private apartments: Apartment[] = [];
-  private criteria: FilterCriteria = [];
 
-  constructor(apartments: Apartment[], criteria: FilterCriteria) {
+  constructor(apartments: Apartment[]) {
     this.apartments = apartments;
-    this.criteria = criteria;
   }
 
-  public applyFilters() {
-    const filtered = this.apartments.filter((apartment: Apartment) => this.matchesCriteria(apartment));
+  // Apply filters to the apartments based on the criteria
+  public applyFilters(criteria: FilterCriteria) {
+    const filtered = this.apartments.filter((apartment: Apartment) => this.matchesCriteria(apartment, criteria));
     console.log(filtered);
   }
 
-  private matchesCriteria(apartment: Apartment) {
-    return Object.entries(this.criteria).every(([key, value]) => {
+  // Check if the apartment matches all criteria
+  private matchesCriteria(apartment: Apartment, criteria: FilterCriteria) {
+    return Object.entries(criteria).every(([key, value]) => {
       const [filterType, property] = key.split("_") as [string, string];
       const apartmentValue = apartment[property];
       const criteriaValue = value;
 
-      const filter = this.filters[filterType as keyof typeof this.filters];
-      if (!filter) {
-        console.error(`Filter type "${filterType}" is not supported.`);
-        return true; // Skip filtering if the filter type is not supported
+      if (filterType === "equals" && isPrimitive(apartmentValue) && isPrimitive(criteriaValue)) {
+        return this.filters.equals(apartmentValue, criteriaValue);
       }
-      return filter(apartmentValue, criteriaValue);
+      if (
+        filterType === "contains" &&
+        isArrayOfStringOrNumber(apartmentValue) &&
+        isArrayOfStringOrNumber(criteriaValue)
+      ) {
+        return this.filters.contains(apartmentValue, criteriaValue);
+      }
+      console.log(`Filter type "${filterType}" is not recognized or types do not match.`);
+      return false; // If the filter type is not recognized or types do not match, return false
     });
   }
 
+  // Define the filter functions
   private filters = {
     contains: (apartmentValue: (string | number)[], criteriaValue: (string | number)[]) =>
-      Array.isArray(apartmentValue) && criteriaValue.every(item => apartmentValue.includes(item)),
+      Array.isArray(apartmentValue) &&
+      Array.isArray(criteriaValue) &&
+      criteriaValue.every(item => apartmentValue.includes(item)),
     equals: (apartmentValue: string | number | boolean, criteriaValue: string | number | boolean) =>
       apartmentValue === criteriaValue,
   };
