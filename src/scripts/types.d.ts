@@ -1,4 +1,4 @@
-type Apartment = {
+type Item = {
   id: number;
   name: string;
   [key: string]: (string | number | boolean) | (string | number)[];

@@ -10,24 +10,25 @@ export default class Criteria {
     this.filtersContainer = document.querySelector(this.selectors.container);
   }
 
-  public get() {
+  public get(): FilterCriteria {
     this.addEqualsCriteria();
     this.addContainsCriteria();
+    console.log(this.criteria);
     return this.criteria;
   }
 
   private addContainsCriteria() {
     if (!this.filtersContainer) return;
     const checkboxes = Array.from(this.filtersContainer?.querySelectorAll(`input[type="checkbox"]:checked`));
-    const checkboxGroups = new Map<string, string[]>();
+    const checkboxGroups: { [name: string]: string[] } = {};
     checkboxes.forEach(checkbox => {
       const name = (checkbox as HTMLInputElement).name;
-      if (!checkboxGroups.has(name)) {
-        checkboxGroups.set(name, []);
+      if (!checkboxGroups[name]) {
+        checkboxGroups[name] = [];
       }
-      checkboxGroups.get(name)?.push((checkbox as HTMLInputElement).value);
-      checkboxGroups.forEach((values, name) => {
-        this.criteria[`contains_${name}`] = values;
+      checkboxGroups[name]?.push((checkbox as HTMLInputElement).value);
+      Object.entries(checkboxGroups).forEach(([key, value]) => {
+        this.criteria[`contains_${key}`] = value;
       });
     });
   }
